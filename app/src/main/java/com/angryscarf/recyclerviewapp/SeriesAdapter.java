@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,24 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesView
     public void onBindViewHolder(SeriesViewHolder holder, int position) {
         holder.name.setText(series.get(position).getName());
         holder.img.setImageResource(series.get(position).getImg());
+
+
+        //custom onClickListener to send access the position of the corresponding series
+        holder.card.findViewById(R.id.btn_ver).setOnClickListener((new intOnClickListener(position)));
+
+
+    }
+    //custom Listener
+    private class intOnClickListener implements View.OnClickListener{
+        int pos;
+        public intOnClickListener(int pos) {
+            this.pos = pos;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(v.getContext(), series.get(pos).getDesc(), Toast.LENGTH_LONG).show();
+        }
     }
 
 
